@@ -75,7 +75,7 @@ def quit():
     exit()
 
 def _format_name(name):
-    return re.sub('[A-Z]|_', ' ', name).title()
+    return re.sub('([A-Z])', r' \1', name).replace('_', ' ').strip().title()
 
 def _make_menu(menu_actions, parent=None):
     trayIconMenu = QtGui.QMenu(None)
@@ -135,6 +135,6 @@ def tray(hover_name=None,
     return _SimpleTray.instance
 
 if __name__ == '__main__':
-    tray('Tray Test Module', menu_actions=[notify, None, quit])
-    def a(): print 'hello'
-    notify('Title', 'Message.', on_click=a)
+    def testFunction(): print 'hello'
+    tray('Tray Test Module', menu_actions=[testFunction, None, lambda: quit()])
+    notify('Title', 'Message.')
