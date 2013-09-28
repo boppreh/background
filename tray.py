@@ -96,7 +96,7 @@ def show_source():
     os.startfile('.')
 
 def tray(hover_name=None,
-         icon_path=None,
+         icon_path='application.png',
          menu_actions=(show_source, None, quit),
          on_click=lambda: None,
          on_double_click=show_source):
@@ -139,5 +139,5 @@ def tray(hover_name=None,
 
 if __name__ == '__main__':
     def testFunction(): print 'hello'
-    tray('Tray Test Module', menu_actions=[testFunction, None, lambda: quit()])
+    tray('Tray Test Module', menu_actions=[testFunction, None, quit])
     notify('Title', 'Message.')
