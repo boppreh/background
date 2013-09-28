@@ -15,10 +15,11 @@ class _HttpHandler(BaseHTTPRequestHandler):
             self.path = self.path[1:]
 
         value = _HttpHandler.dictionary
-        for part in self.path.split('/'):
-            value = value[part]
-            if hasattr(value, '__call__'):
-                value = value()
+        if self.path:
+            for part in self.path.split('/'):
+                value = value[part]
+                if hasattr(value, '__call__'):
+                    value = value()
 
         self.wfile.write(str(value))
 
