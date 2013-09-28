@@ -7,7 +7,8 @@ class _HttpHandler(BaseHTTPRequestHandler):
     """
     Extracts the response from the class attribute "_HttpHandler.dictionary".,
     according to the path requested. GET /a/b/c is evaluated as
-    _HttpHandler.dictionary['a']['b']['c'].
+    _HttpHandler.dictionary['a']['b']['c']. Functions are replaced by their
+    returned values.
     """
     def do_GET(self):
         if self.path.startswith('/'):
@@ -24,7 +25,9 @@ class _HttpHandler(BaseHTTPRequestHandler):
 def start_http_server(dictionary, port=80):
     """
     Starts an HTTP server in a new thread that returns the values from the
-    given dictionary. GET /a/b/c is evaluated as dictionary['a']['b']['c'].
+    given dictionary. GET /a/b/c is evaluated as dictionary['a']['b']['c']. If
+    an intermediary value is a function, it'll be invoked and the return value
+    used.
 
     Starts a tray icon if one hasn't been set yet so the user can close the
     application.
