@@ -1,6 +1,7 @@
 import win32con
 import os
 from tray import *
+from server import *
 
 # Map common key names to their official names in the win32con module.
 _replacement_hotkeys = {'BACKSPACE': 'BACK',
