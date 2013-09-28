@@ -92,11 +92,14 @@ def _make_menu(menu_actions, parent=None):
 
     return trayIconMenu
 
+def show_source():
+    os.startfile('.')
+
 def tray(hover_name=None,
-         icon_path='images/heart.svg',
-         menu_actions=[quit],
+         icon_path=None,
+         menu_actions=(show_source, None, quit),
          on_click=lambda: None,
-         on_double_click=lambda: os.startfile('.')):
+         on_double_click=show_source):
     """
     Creates a new tray icon and starts processing messages for it. This is a
     non-blocking call that starts a new thread to process events for this tray
@@ -108,7 +111,7 @@ def tray(hover_name=None,
 
     icon_path is the path of the .ico file that will be used as icon.
 
-    menu_actions is a list of functions and None values acting as Separator
+    menu_actions is a list of functions, with None values acting as Separator
     instances. If a list of functions is given, the name of each option will be
     extracted from the function's func_name and None objects will be rendered
     as separators. If no function is given, a simple "Quit" option is used.
