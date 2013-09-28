@@ -16,6 +16,8 @@ class _HttpHandler(BaseHTTPRequestHandler):
         value = _HttpHandler.dictionary
         for part in self.path.split('/'):
             value = value[part]
+            if hasattr(value, '__call__'):
+                value = value()
 
         self.wfile.write(str(value))
 
