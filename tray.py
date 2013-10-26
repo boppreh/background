@@ -82,7 +82,7 @@ def _make_menu(menu_actions, parent=None):
 
     for func in menu_actions:
         if func is not None:
-            name = _format_name(func.func_name)
+            name = _format_name(func.__name__)
             # 'triggered' sends a boolean parameter that must be ignored.
             func_handler = lambda b, func=func: func()
             action = QtGui.QAction(name, parent, triggered=func_handler)
@@ -113,7 +113,7 @@ def tray(hover_name=None,
 
     menu_actions is a list of functions, with None values acting as Separator
     instances. If a list of functions is given, the name of each option will be
-    extracted from the function's func_name and None objects will be rendered
+    extracted from the function's __name__ and None objects will be rendered
     as separators. If no function is given, a simple "Quit" option is used.
 
     on_click function to be called when the icon is clicked.
@@ -138,6 +138,6 @@ def tray(hover_name=None,
     return _SimpleTray.instance
 
 if __name__ == '__main__':
-    def testFunction(): print 'hello'
+    def testFunction(): print('hello')
     tray('Tray Test Module', menu_actions=[testFunction, None, quit])
     notify('Title', 'Message.')
