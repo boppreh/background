@@ -72,7 +72,7 @@ def quit():
     Destroys the current tray icon and calls exit() to quit all threads.
     """
     destroy()
-    exit()
+    sys.exit()
 
 def _format_name(name):
     return re.sub('([A-Z])', r' \1', name).replace('_', ' ').strip().title()
